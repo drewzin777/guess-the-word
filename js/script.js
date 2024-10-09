@@ -70,6 +70,7 @@ function makeGuess(letter) {
         console.log(`Guessed letters array: ${guessedLettersArray}`);
         guessedLetters.innerText += letter + " ";  //Display guessed letters
         updateWordInProgress();                    //Update word display
+        checkIfPlayerWon();
     }
 }
 
@@ -85,4 +86,13 @@ function updateWordInProgress() {
         }
     }
     wordInProgress.innerText = revealWord.join("");
+}
+
+function checkIfPlayerWon() {
+    if (wordInProgress.innerText === word) {
+        message.innerText = "Congratulation! You guessed the word!"; 
+        console.log("Player won the game");
+        guessLetterButton.disabled = true; 
+        playAgainButton.style.display = "block";
+    }
 }
