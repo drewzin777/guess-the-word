@@ -143,9 +143,9 @@ function updateWordInProgress() {
 function checkIfPlayerWon() {
     if (wordInProgress.innerText === word) {
         message.innerText = "Congratulations! You guessed the word!"; 
-        console.log("Player won the game");
-        guessLetterButton.disabled = true; 
-        playAgainButton.style.display = "block";
+        console.log("Player won the game"); 
+
+        startOver();
     }
 }
 
@@ -165,10 +165,29 @@ function countRemainingGuesses(letter) {
         message.innerText = `Game over! The word was ${word}.`;
         guessLetterButton.disabled = true; 
         playAgainButton.style.display = "block";  //show the play againg button
+        startOver();
     }
+}
+
+//Function to hide elements and show the play again button 
+function startOver() {
+    guessLetterButton.classList.add("hide"); 
+    //remainingGuesses.classList.add("hide"); 
+    //guessedLetters.classList.add("hide"); 
+    playAgainButton.classList.remove("hide"); 
+    letterInput.disabled = true; 
+    //clear the input field when gamve over
+    //letterInput.value = "";
 }
 
 //Reset and restart the game when "Play Again is clicked"
 playAgainButton.addEventListener("click", function () {
     getWord();     //Fetch a new word to start the game again
+    initializeGame();
+    guessLetterButton.classList.remove("hide"); 
+    //remainingGuesses.classList.remove("hide"); 
+    //guessedLetters.classList.remove("hide");
+    playAgainButton.classList.add("hide");
 });
+
+getWord();
